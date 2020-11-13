@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ymq.dao.DataDao">
+
+    <resultMap id="BaseResultMap" type="com.ymq.bean.Datas">
+        <id column="news_type" jdbcType="INTEGER" property="newsType"/>
+        <result column="read_num" jdbcType="INTEGER" property="readNum"/>
+        <result column="type_num" jdbcType="INTEGER" property="typeNum"/>
+    </resultMap>
+
+
+    <select id="queryAllDatas" resultMap="BaseResultMap">
+    	select * from datas order by news_type;
+    </select>
+    <select id="addDatas" resultMap="BaseResultMap">
+        update datas set type_num=type_num+1 where news_type = #{newsType};
+    </select>
+    <select id="subDatas" resultMap="BaseResultMap">
+        update datas set type_num=type_num-1 where news_type = #{newsType};
+    </select>
+
+</mapper>

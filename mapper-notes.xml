@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ymq.dao.NotesDao">
+
+    <resultMap id="BaseResultMap" type="com.ymq.bean.Notes">
+        <id column="notes_id" jdbcType="INTEGER" property="notesId"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="author" jdbcType="VARCHAR" property="author"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="publish_time" jdbcType="CHAR" property="publishTime"/>
+    </resultMap>
+
+    <insert id="insertNotes" parameterType="com.ymq.bean.Notes">
+    	insert into notes(notes_id,title,author,content,publish_time) values(#{notesId},#{title},#{author},#{content},#{publishTime});
+    </insert>
+
+    <update id="updateNotes" parameterType="com.ymq.bean.Notes">
+    update notes set title=#{title},author=#{author},content=#{content} where notes_id=#{notesId}
+    </update>
+
+    <select id="queryAllNotes" resultMap="BaseResultMap">
+    	select * from notes  order by publish_time desc;
+    </select>
+
+    <select id="queryNotesByID" parameterType="INTEGER" resultMap="BaseResultMap">
+    	select * from notes where notes_id=#{notesId} ;
+    </select>
+
+    <select id="queryNotesCount" resultType="int">
+    	select count(*) from notes;
+    </select>
+
+    <delete id="deleteNotes" >
+    	delete from notes where notes_id=#{notesId}
+    </delete>
+
+</mapper>
